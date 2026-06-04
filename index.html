@@ -3,7 +3,7 @@
 <meta name="theme-color" content="#0a0e27"><meta name="referrer" content="no-referrer">
 <title>CENTURY 21 DAB · Cockpit de Captación</title>
 <style>
-:root{--bg:#0a0e27;--panel:#121734;--panel2:#1a2040;--line:#2a3157;--txt:#e7e9f3;--mut:#8b93b8;--gold:#BE9B3F;--gold2:#e0c071}
+:root{--bg:#0a0e27;--panel:#121734;--panel2:#1a2040;--line:#2a3157;--txt:#e7e9f3;--mut:#8b93b8;--gold:#BE9B3F;--gold2:#e0c071}body.light{--bg:#eef1f8;--panel:#ffffff;--panel2:#f4f6fb;--line:#dde3ef;--txt:#1f2433;--mut:#5a6178;--gold:#a9842f;--gold2:#8a6d1f}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
 a{color:var(--gold2);text-decoration:none}
@@ -58,7 +58,7 @@ tr.main:hover td{background:var(--panel2)}
 <header><div>
 <h1>CENTURY <span>21</span> DAB · Cockpit de Captación</h1>
 <div class="sub">Propietarios directos · Venta y Arriendo · Armenia · Pereira · Ibagué (+Calarcá) · Fuentes: MercadoLibre + Facebook Marketplace</div>
-</div><div class="live" id="live">datos del —</div></header>
+</div><div style="display:flex;align-items:center"><button id="theme" onclick="toggleTheme()" title="Cambiar dia/noche" style="background:none;border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:6px 11px;font-size:15px;cursor:pointer;margin-right:10px">🌙</button><div class="live" id="live">datos del —</div></div></header>
 <div class="cards">
 <div class="kpi"><div class="n" id="cT">0</div><div class="l">Leads</div></div>
 <div class="kpi"><div class="n v" id="cV">0</div><div class="l">Verde · contactar</div></div>
@@ -86,6 +86,9 @@ Marketplace exige confirmar en el perfil que sea propietario (no inmobiliaria); 
 </div></div>
 <script>
 let L=[],sortK="score",sortD=-1;
+function applyTheme(t){document.body.classList.toggle("light",t=="light");var b=document.getElementById("theme");if(b)b.textContent=t=="light"?"☀️":"🌙";}
+function toggleTheme(){var t=document.body.classList.contains("light")?"dark":"light";try{localStorage.setItem("c21theme",t);}catch(e){}applyTheme(t);}
+try{applyTheme(localStorage.getItem("c21theme")||"dark");}catch(e){applyTheme("dark");}
 const $=id=>document.getElementById(id);
 const fmt=n=>n==null?"—":"$"+(n||0).toLocaleString("es-CO");
 const esc=s=>(s||"").toString().replace(/&/g,"&amp;").replace(/</g,"&lt;");
